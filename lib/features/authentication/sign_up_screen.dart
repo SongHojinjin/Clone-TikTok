@@ -47,12 +47,12 @@ void _onEmailTap(BuildContext context){
               Gaps.v40,
               GestureDetector(
                 onTap: () => _onEmailTap(context),
-                child: AuthButton(
+                child: const AuthButton(
                   icon: FaIcon(FontAwesomeIcons.user),
-                  text: 'Use email & passwoed'),
+                  text: 'Use email & password'),
               ),
               Gaps.v6,
-              AuthButton(
+              const AuthButton(
                 icon: FaIcon(FontAwesomeIcons.apple),
                 text: 'Continue with Apple'),
             ],
@@ -69,7 +69,7 @@ void _onEmailTap(BuildContext context){
               const Text('Already have an account?'),
               Gaps.h4,
               GestureDetector(
-                onTap: () => _onEmailTap(context),
+                onTap: () => _onLoginTap(context),
                 child: Text('Log in',
                 style: TextStyle(
                   color: Theme.of(context).primaryColor,

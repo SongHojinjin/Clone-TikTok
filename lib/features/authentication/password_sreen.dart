@@ -4,7 +4,7 @@ import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/features/authentication/birthday_screen.dart';
 import 'package:tiktok_clone/features/authentication/password_sreen.dart';
-import 'package:tiktok_clone/features/authentication/widgets/form_buton.dart';
+import 'package:tiktok_clone/features/authentication/widgets/form_button.dart';
 
 class PasswordSreen extends StatefulWidget {
   const PasswordSreen({super.key});
