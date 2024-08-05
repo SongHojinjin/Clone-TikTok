@@ -38,53 +38,25 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: screens[_selectedIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _selectedIndex,
-        onTap: _onTap,
-        selectedItemColor: Theme.of(context).primaryColor,
-        // unselectedItemColor: Colors.white,
-        items: const [
-          BottomNavigationBarItem(
-            icon: FaIcon(
-              FontAwesomeIcons.house,
-            ),
-            label: 'Home',
-            tooltip: 'tooltip?',
-            backgroundColor: Colors.amber,
-          ),
-          BottomNavigationBarItem(
-              icon: FaIcon(
-                FontAwesomeIcons.magnifyingGlass,
-              ),
-              label: 'Search',
-              tooltip: 'tooltip?',
-              backgroundColor: Colors.blue),
-          BottomNavigationBarItem(
-            icon: FaIcon(
-              FontAwesomeIcons.magnifyingGlass,
-            ),
-            label: 'Search',
-            tooltip: 'tooltip?',
-            backgroundColor: Colors.pink,
-          ),
-          BottomNavigationBarItem(
-            icon: FaIcon(
-              FontAwesomeIcons.magnifyingGlass,
-            ),
-            label: 'Search',
-            tooltip: 'tooltip?',
-            backgroundColor: Colors.yellow,
-          ),
-          BottomNavigationBarItem(
-              icon: FaIcon(
-                FontAwesomeIcons.magnifyingGlass,
-              ),
-              label: 'Search',
-              tooltip: 'tooltip?',
-              backgroundColor: Colors.teal),
-        ],
-      ),
-    );
+        body: screens[_selectedIndex],
+        bottomNavigationBar: NavigationBar(
+          selectedIndex: _selectedIndex,
+          onDestinationSelected: _onTap,
+          labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+          destinations: const [
+            NavigationDestination(
+                icon: FaIcon(
+                  FontAwesomeIcons.house,
+                  color: Colors.grey,
+                ),
+                label: 'Home'),
+            NavigationDestination(
+                icon: FaIcon(
+                  FontAwesomeIcons.magnifyingGlass,
+                  color: Colors.grey,
+                ),
+                label: 'Search'),
+          ],
+        ));
   }
 }
