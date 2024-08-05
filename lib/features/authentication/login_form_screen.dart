@@ -12,18 +12,19 @@ class LoginFormScreen extends StatefulWidget {
 }
 
 class _LoginFormScreenState extends State<LoginFormScreen> {
-
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>(); // Global key??
-  
+
   Map<String, String> formData = {};
 
-  void _onSubmitTap(){
-    if(_formKey.currentState != null){
-      if(_formKey.currentState!.validate()){
+  void _onSubmitTap() {
+    if (_formKey.currentState != null) {
+      if (_formKey.currentState!.validate()) {
         _formKey.currentState!.save();
-        Navigator.of(context).push(
+        Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
-            builder: (context) => const InterestsScreen(),)
+            builder: (context) => const InterestsScreen(),
+          ),
+          (route) => false,
         );
       }
     }
@@ -36,10 +37,9 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
         title: const Text('Log in'),
       ),
       body: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: Sizes.size20
-            ),
-          child: Form( // Form 위젯이란??
+        padding: const EdgeInsets.symmetric(horizontal: Sizes.size20),
+        child: Form(
+            // Form 위젯이란??
             key: _formKey,
             child: Column(
               children: [
@@ -62,7 +62,7 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
                     return null;
                   },
                   onSaved: (newValue) {
-                    if (newValue != null){
+                    if (newValue != null) {
                       formData['email'] = newValue;
                     }
                   },
@@ -87,19 +87,20 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
                     return null;
                   },
                   onSaved: (newValue) {
-                    if (newValue != null){
+                    if (newValue != null) {
                       formData['password'] = newValue;
                     }
                   },
                 ),
                 Gaps.v28,
                 GestureDetector(
-                  onTap: _onSubmitTap,
-                  child: const FormButton(disabled: false) // text 속성을 추가하여 글씨를 커스텀할 수 있게 코드 수정하기
-                  ), 
+                    onTap: _onSubmitTap,
+                    child: const FormButton(
+                        disabled: false) // text 속성을 추가하여 글씨를 커스텀할 수 있게 코드 수정하기
+                    ),
               ],
-          )),  
-          ),
+            )),
+      ),
     );
   }
 }

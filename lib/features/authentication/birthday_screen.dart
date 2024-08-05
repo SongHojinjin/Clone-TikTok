@@ -30,14 +30,16 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
     super.dispose();
   }
 
-  void onNextTap(){
-    Navigator.of(context).push(
+  void onNextTap() {
+    Navigator.of(context).pushAndRemoveUntil(
       MaterialPageRoute(
-        builder: (context) => const InterestsScreen(),)
+        builder: (context) => const InterestsScreen(),
+      ),
+      (route) => false,
     );
   }
 
-  void _setTextFieldDate(DateTime date){
+  void _setTextFieldDate(DateTime date) {
     final textDate = date.toString().split(' ').first;
     _birthdaycontroller.value = TextEditingValue(text: textDate);
   }
@@ -48,7 +50,9 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         surfaceTintColor: Colors.white, // appbar 색상 변경
-        title: const Text('Sign up',),
+        title: const Text(
+          'Sign up',
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: Sizes.size20),
@@ -56,40 +60,40 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Gaps.v40,
-            const Text('When is your birthday?',
-            style: TextStyle(
-              fontSize: Sizes.size24,
-              fontWeight: FontWeight.w700,
-            ),),
+            const Text(
+              'When is your birthday?',
+              style: TextStyle(
+                fontSize: Sizes.size24,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
             Gaps.v8,
-            const Text('Your birthday won\'t be shown publicly.',
-            style: TextStyle(
-              color: Colors.black54,
-              fontSize: Sizes.size16,
-            ),),
+            const Text(
+              'Your birthday won\'t be shown publicly.',
+              style: TextStyle(
+                color: Colors.black54,
+                fontSize: Sizes.size16,
+              ),
+            ),
             Gaps.v16,
             TextField(
               //enabled: false, // 입력란의 글씨도 회색으로 보이게 됨
               readOnly: true,
               controller: _birthdaycontroller,
               decoration: InputDecoration(
-                enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(
+                  enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
                     color: Colors.grey.shade400,
-                  )
-                ),
-                focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(
+                  )),
+                  focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
                     color: Colors.grey.shade400,
-                  )
-                )
-              ),
+                  ))),
               cursorColor: Theme.of(context).primaryColor,
             ),
             Gaps.v16,
             GestureDetector(
-              onTap: onNextTap,
-              child: const FormButton(disabled: false)),
+                onTap: onNextTap, child: const FormButton(disabled: false)),
           ],
         ),
       ),
