@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/features/videos/widgets/video_button.dart';
+import 'package:tiktok_clone/features/videos/widgets/videos_comment.dart';
 import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
@@ -16,7 +18,8 @@ class VideoPost extends StatefulWidget {
   State<VideoPost> createState() => _VideoPostState();
 }
 
-class _VideoPostState extends State<VideoPost> with SingleTickerProviderStateMixin{
+class _VideoPostState extends State<VideoPost>
+    with SingleTickerProviderStateMixin {
   final VideoPlayerController _videoPlayerController =
       VideoPlayerController.asset('assets/videos/gapyeong.mp4');
   late final AnimationController _animationController;
@@ -63,7 +66,9 @@ class _VideoPostState extends State<VideoPost> with SingleTickerProviderStateMix
   }
 
   void _onVisibilityChanged(VisibilityInfo info) {
-    if (info.visibleFraction == 1 && !_videoPlayerController.value.isPlaying) {
+    if (info.visibleFraction == 1 &&
+        !_isPaused &&
+        !_videoPlayerController.value.isPlaying) {
       _videoPlayerController.play();
     }
   }
@@ -72,12 +77,24 @@ class _VideoPostState extends State<VideoPost> with SingleTickerProviderStateMix
     if (!_videoPlayerController.value.isPlaying) {
       _videoPlayerController.play();
       _animationController.reverse();
-      _isPaused = false;
     } else {
       _videoPlayerController.pause();
       _animationController.forward();
-      _isPaused = true;
     }
+    setState(() {
+      _isPaused = !_isPaused;
+    });
+  }
+
+  void _onCommentTap(BuildContext context) async {
+    if (_videoPlayerController.value.isPlaying) {
+      _onToggleTap();
+    }
+    await showModalBottomSheet(
+      context: context,
+      builder: (context) => VideosComment(),
+    );
+    _onToggleTap();
   }
 
   @override
@@ -121,42 +138,59 @@ class _VideoPostState extends State<VideoPost> with SingleTickerProviderStateMix
             ),
           )),
           const Positioned(
-            bottom: 60,
-            left: 10,
-            child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('@username', style: TextStyle(
-                color: Colors.white,
-                fontSize: Sizes.size20,
-                fontWeight: FontWeight.w400
-              ),),
-              Gaps.v20,
-              Text('firefirefire. this is fire.', style: TextStyle(
-                color: Colors.white,
-                fontSize: Sizes.size16,
-              ),),
-            ],
-          )),
-          const Positioned(
-            bottom: 50,
-            right: 10,
-            child: Column(
-              children: [
-                CircleAvatar(
-                  radius: 25,
-                  backgroundColor: Colors.blue,
-                  child: Text('^_^'),
-                  foregroundImage: NetworkImage('https://avatars.githubusercontent.com/u/74577721?v=4'),
-                ),
-                Gaps.v28,
-                VideoButton(icon: FontAwesomeIcons.solidHeart, label: '2.5M',),
-                Gaps.v20,
-                VideoButton(icon: FontAwesomeIcons.solidComment, label: '33.0K',),
-                Gaps.v20,
-                VideoButton(icon: FontAwesomeIcons.share, label: 'Share',),
-              ],
-          ))
+              bottom: 60,
+              left: 10,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '@username',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: Sizes.size20,
+                        fontWeight: FontWeight.w400),
+                  ),
+                  Gaps.v20,
+                  Text(
+                    'firefirefire. this is fire.',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: Sizes.size16,
+                    ),
+                  ),
+                ],
+              )),
+          Positioned(
+              bottom: 50,
+              right: 10,
+              child: Column(
+                children: [
+                  const CircleAvatar(
+                    radius: 25,
+                    backgroundColor: Colors.blue,
+                    child: Text('^_^'),
+                    foregroundImage: NetworkImage(
+                        'https://avatars.githubusercontent.com/u/74577721?v=4'),
+                  ),
+                  Gaps.v28,
+                  const VideoButton(
+                    icon: FontAwesomeIcons.solidHeart,
+                    label: '2.5M',
+                  ),
+                  Gaps.v20,
+                  GestureDetector(
+                      onTap: () => _onCommentTap(context),
+                      child: const VideoButton(
+                        icon: FontAwesomeIcons.solidComment,
+                        label: '33.0K',
+                      )),
+                  Gaps.v20,
+                  const VideoButton(
+                    icon: FontAwesomeIcons.share,
+                    label: 'Share',
+                  ),
+                ],
+              ))
         ],
       ),
     );
