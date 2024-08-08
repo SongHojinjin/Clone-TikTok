@@ -35,7 +35,7 @@ class PostVideoButton extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
+          padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
           child: Container(
             height: 32,
             padding: const EdgeInsets.symmetric(horizontal: Sizes.size12),
