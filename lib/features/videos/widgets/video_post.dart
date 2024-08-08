@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
+import 'package:tiktok_clone/features/videos/widgets/video_button.dart';
 import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
@@ -23,6 +25,7 @@ class _VideoPostState extends State<VideoPost> with SingleTickerProviderStateMix
 
   void _initVideoPlayer() async {
     await _videoPlayerController.initialize();
+    await _videoPlayerController.setLooping(true);
     setState(() {});
     _videoPlayerController.addListener(_onVideoChange);
   }
@@ -69,9 +72,11 @@ class _VideoPostState extends State<VideoPost> with SingleTickerProviderStateMix
     if (!_videoPlayerController.value.isPlaying) {
       _videoPlayerController.play();
       _animationController.reverse();
+      _isPaused = false;
     } else {
       _videoPlayerController.pause();
       _animationController.forward();
+      _isPaused = true;
     }
   }
 
@@ -114,6 +119,43 @@ class _VideoPostState extends State<VideoPost> with SingleTickerProviderStateMix
                 ),
               ),
             ),
+          )),
+          const Positioned(
+            bottom: 60,
+            left: 10,
+            child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('@username', style: TextStyle(
+                color: Colors.white,
+                fontSize: Sizes.size20,
+                fontWeight: FontWeight.w400
+              ),),
+              Gaps.v20,
+              Text('firefirefire. this is fire.', style: TextStyle(
+                color: Colors.white,
+                fontSize: Sizes.size16,
+              ),),
+            ],
+          )),
+          const Positioned(
+            bottom: 50,
+            right: 10,
+            child: Column(
+              children: [
+                CircleAvatar(
+                  radius: 25,
+                  backgroundColor: Colors.blue,
+                  child: Text('^_^'),
+                  foregroundImage: NetworkImage('https://avatars.githubusercontent.com/u/74577721?v=4'),
+                ),
+                Gaps.v28,
+                VideoButton(icon: FontAwesomeIcons.solidHeart, label: '2.5M',),
+                Gaps.v20,
+                VideoButton(icon: FontAwesomeIcons.solidComment, label: '33.0K',),
+                Gaps.v20,
+                VideoButton(icon: FontAwesomeIcons.share, label: 'Share',),
+              ],
           ))
         ],
       ),
