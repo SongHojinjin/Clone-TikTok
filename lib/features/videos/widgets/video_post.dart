@@ -47,9 +47,9 @@ class _VideoPostState extends State<VideoPost> with SingleTickerProviderStateMix
       value: 1.5,
       duration: _animationDuration,
     );
-    _animationController.addListener(() {
-      setState(() {});
-    },);
+    // _animationController.addListener(() {
+    //   setState(() {});
+    // },);
   }
 
   @override
@@ -73,9 +73,6 @@ class _VideoPostState extends State<VideoPost> with SingleTickerProviderStateMix
       _videoPlayerController.pause();
       _animationController.forward();
     }
-    setState(() {
-      _isPaused = !_isPaused;
-    });
   }
 
   @override
@@ -98,8 +95,14 @@ class _VideoPostState extends State<VideoPost> with SingleTickerProviderStateMix
           Positioned.fill(
               child: IgnorePointer(
             child: Center(
-              child: Transform.scale(
-                scale: _animationController.value,
+              child: AnimatedBuilder(
+                animation: _animationController,
+                builder: (context, child) {
+                  return Transform.scale(
+                    scale: _animationController.value,
+                    child: child,
+                  );
+                },
                 child: AnimatedOpacity(
                   duration: _animationDuration,
                   opacity: _isPaused ? 1 : 0,
