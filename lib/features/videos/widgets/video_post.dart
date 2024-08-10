@@ -71,6 +71,9 @@ class _VideoPostState extends State<VideoPost>
         !_videoPlayerController.value.isPlaying) {
       _videoPlayerController.play();
     }
+    if (_videoPlayerController.value.isPlaying && info.visibleFraction == 0) {
+      _onToggleTap();
+    }
   }
 
   void _onToggleTap() {
@@ -91,6 +94,7 @@ class _VideoPostState extends State<VideoPost>
       _onToggleTap();
     }
     await showModalBottomSheet(
+      isScrollControlled: true,
       context: context,
       builder: (context) => VideosComment(),
     );
@@ -130,7 +134,7 @@ class _VideoPostState extends State<VideoPost>
                   opacity: _isPaused ? 1 : 0,
                   child: const FaIcon(
                     FontAwesomeIcons.play,
-                    color: Colors.black,
+                    color: Colors.white,
                     size: Sizes.size52,
                   ),
                 ),
@@ -158,6 +162,7 @@ class _VideoPostState extends State<VideoPost>
                       fontSize: Sizes.size16,
                     ),
                   ),
+                  Gaps.v6,
                 ],
               )),
           Positioned(
