@@ -159,7 +159,8 @@ class _VideosCommentState extends State<VideosComment> {
                                 contentPadding: const EdgeInsets.symmetric(
                                     horizontal: Sizes.size12),
                                 suffixIcon: Padding(
-                                  padding: EdgeInsets.only(right: Sizes.size8),
+                                  padding:
+                                      const EdgeInsets.only(right: Sizes.size8),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.min,
                                     mainAxisAlignment: MainAxisAlignment.end,

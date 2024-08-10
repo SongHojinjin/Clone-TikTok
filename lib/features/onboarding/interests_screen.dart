@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/features/onboarding/tutorial_screen.dart';
@@ -54,28 +53,29 @@ class InterestsScreen extends StatefulWidget {
 }
 
 class _InterestsScreenState extends State<InterestsScreen> {
-
   final ScrollController _scrollController = ScrollController();
 
   bool _showTitle = false;
-  
-  void _onScroll(){
-    if(_scrollController.offset > 220){
-      if(_showTitle) return;
+
+  void _onScroll() {
+    if (_scrollController.offset > 220) {
+      if (_showTitle) return;
       setState(() {
         _showTitle = true;
       });
-    }
-    else {
+    } else {
       setState(() {
         _showTitle = false;
       });
     }
   }
 
-  void _onNextTap(){
-    Navigator.push(context, MaterialPageRoute(builder: 
-    (context) => const TutorialScreen(),));
+  void _onNextTap() {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const TutorialScreen(),
+        ));
   }
 
   @override
@@ -95,9 +95,9 @@ class _InterestsScreenState extends State<InterestsScreen> {
       appBar: AppBar(
         surfaceTintColor: Colors.white,
         title: AnimatedOpacity(
-          opacity: _showTitle ? 1 : 0,
-          duration: const Duration(milliseconds: 300),
-          child: const Text('Choose your interests')),
+            opacity: _showTitle ? 1 : 0,
+            duration: const Duration(milliseconds: 300),
+            child: const Text('Choose your interests')),
       ),
       body: Scrollbar(
         controller: _scrollController,
@@ -113,24 +113,27 @@ class _InterestsScreenState extends State<InterestsScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Gaps.v32,
-                const Text('Choose your\ninterests',
-                style: TextStyle(
-                  fontSize: Sizes.size40,
-                  fontWeight: FontWeight.bold,
-                ),
+                const Text(
+                  'Choose your\ninterests',
+                  style: TextStyle(
+                    fontSize: Sizes.size40,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 Gaps.v20,
-                const Text('Get better video recommendation.',
-                style: TextStyle(
-                  fontSize: Sizes.size20,
-                ),
+                const Text(
+                  'Get better video recommendation.',
+                  style: TextStyle(
+                    fontSize: Sizes.size20,
+                  ),
                 ),
                 Gaps.v60,
                 Wrap(
                   runSpacing: 15,
                   spacing: 15,
                   children: [
-                    for(var interest in interests) InterestButton(interest: interest)
+                    for (var interest in interests)
+                      InterestButton(interest: interest)
                   ],
                 ),
               ],
@@ -152,19 +155,18 @@ class _InterestsScreenState extends State<InterestsScreen> {
           child: GestureDetector(
             onTap: _onNextTap,
             child: Container(
-              padding: const EdgeInsets.symmetric(
-                vertical: Sizes.size20
-              ),
+              padding: const EdgeInsets.symmetric(vertical: Sizes.size20),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(5),
                 color: Theme.of(context).primaryColor,
               ),
-              child: const Text('Next',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: Sizes.size16,
-              ),
+              child: const Text(
+                'Next',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: Sizes.size16,
+                ),
               ),
             ),
           ),
@@ -173,4 +175,3 @@ class _InterestsScreenState extends State<InterestsScreen> {
     );
   }
 }
-

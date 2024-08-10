@@ -3,7 +3,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/features/authentication/birthday_screen.dart';
-import 'package:tiktok_clone/features/authentication/password_sreen.dart';
 import 'package:tiktok_clone/features/authentication/widgets/form_button.dart';
 
 class PasswordSreen extends StatefulWidget {
@@ -22,12 +21,13 @@ class _PasswordScreenState extends State<PasswordSreen> {
   void initState() {
     super.initState();
 
-    _passwordcontroller.addListener(() {
-      
-      setState(() {
-        _password = _passwordcontroller.text;
-      });
-    },);
+    _passwordcontroller.addListener(
+      () {
+        setState(() {
+          _password = _passwordcontroller.text;
+        });
+      },
+    );
   }
 
   @override
@@ -36,27 +36,30 @@ class _PasswordScreenState extends State<PasswordSreen> {
     super.dispose();
   }
 
-  bool _isPasswordValid(){
+  bool _isPasswordValid() {
     return _password.isNotEmpty && _password.length > 8;
   }
 
-  void _onScaffoldTap(){
+  void _onScaffoldTap() {
     FocusScope.of(context).unfocus();
   }
 
   bool _obscureText = true;
 
-  void _onSubmit(){
-    if(!_isPasswordValid()) return;
-    Navigator.push(context, MaterialPageRoute(builder: 
-      (context) => const BirthdayScreen(),));
+  void _onSubmit() {
+    if (!_isPasswordValid()) return;
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const BirthdayScreen(),
+        ));
   }
 
-  void _onClearTap(){
+  void _onClearTap() {
     _passwordcontroller.clear();
   }
 
-  void _toggleObscureText(){
+  void _toggleObscureText() {
     _obscureText = !_obscureText;
     setState(() {});
   }
@@ -68,7 +71,9 @@ class _PasswordScreenState extends State<PasswordSreen> {
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          title: const Text('Sign up',),
+          title: const Text(
+            'Sign up',
+          ),
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: Sizes.size20),
@@ -76,11 +81,13 @@ class _PasswordScreenState extends State<PasswordSreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Gaps.v40,
-              const Text('Make your password',
-              style: TextStyle(
-                fontSize: Sizes.size24,
-                fontWeight: FontWeight.w700,
-              ),),
+              const Text(
+                'Make your password',
+                style: TextStyle(
+                  fontSize: Sizes.size24,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
               Gaps.v16,
               TextField(
                 controller: _passwordcontroller,
@@ -89,64 +96,67 @@ class _PasswordScreenState extends State<PasswordSreen> {
                 obscureText: _obscureText,
                 autocorrect: false,
                 decoration: InputDecoration(
-                  suffix: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      GestureDetector(
-                        onTap: _onClearTap,
-                        child: FaIcon(
-                          FontAwesomeIcons.solidCircleXmark,
-                          color: Colors.grey.shade400,
-                          size: Sizes.size20,
+                    suffix: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        GestureDetector(
+                          onTap: _onClearTap,
+                          child: FaIcon(
+                            FontAwesomeIcons.solidCircleXmark,
+                            color: Colors.grey.shade400,
+                            size: Sizes.size20,
                           ),
-                      ),
-                      Gaps.h16,
-                      GestureDetector(
-                        onTap: _toggleObscureText,
-                        child: FaIcon(
-                          _obscureText ? FontAwesomeIcons.eyeSlash : FontAwesomeIcons.eye,
-                          color: Colors.grey.shade400,
-                          size: Sizes.size20,
+                        ),
+                        Gaps.h16,
+                        GestureDetector(
+                          onTap: _toggleObscureText,
+                          child: FaIcon(
+                            _obscureText
+                                ? FontAwesomeIcons.eyeSlash
+                                : FontAwesomeIcons.eye,
+                            color: Colors.grey.shade400,
+                            size: Sizes.size20,
                           ),
-                      ),
-                    ],
-                  ),
-                  hintText: 'Make it strong',
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
+                        ),
+                      ],
+                    ),
+                    hintText: 'Make it strong',
+                    enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
                       color: Colors.grey.shade400,
-                    )
-                  ),
-                  focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
+                    )),
+                    focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
                       color: Colors.grey.shade400,
-                    )
-                  )
-                ),
+                    ))),
                 cursorColor: Theme.of(context).primaryColor,
               ),
               Gaps.v16,
-              const Text('Yout password must have:',
+              const Text(
+                'Yout password must have:',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                ),          
+                ),
               ),
               Gaps.v14,
-              Row(children: [
-                FaIcon(FontAwesomeIcons.circleCheck, 
-                  size: Sizes.size20,
-                  color: _isPasswordValid() ? Colors.green 
-                  : Colors.grey.shade400,
+              Row(
+                children: [
+                  FaIcon(
+                    FontAwesomeIcons.circleCheck,
+                    size: Sizes.size20,
+                    color: _isPasswordValid()
+                        ? Colors.green
+                        : Colors.grey.shade400,
                   ),
-                Gaps.h5,
-                const Text('8 to 20 characters'),
-              ],
+                  Gaps.h5,
+                  const Text('8 to 20 characters'),
+                ],
               ),
               Gaps.v28,
               GestureDetector(
                 onTap: _onSubmit,
                 child: FormButton(disabled: !_isPasswordValid()),
-              ),              
+              ),
             ],
           ),
         ),

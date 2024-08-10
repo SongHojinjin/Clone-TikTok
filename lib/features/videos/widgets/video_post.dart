@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
@@ -96,7 +95,7 @@ class _VideoPostState extends State<VideoPost>
     await showModalBottomSheet(
       isScrollControlled: true,
       context: context,
-      builder: (context) => VideosComment(),
+      builder: (context) => const VideosComment(),
     );
     _onToggleTap();
   }
@@ -173,9 +172,9 @@ class _VideoPostState extends State<VideoPost>
                   const CircleAvatar(
                     radius: 25,
                     backgroundColor: Colors.blue,
-                    child: Text('^_^'),
                     foregroundImage: NetworkImage(
                         'https://avatars.githubusercontent.com/u/74577721?v=4'),
+                    child: Text('^_^'),
                   ),
                   Gaps.v28,
                   const VideoButton(
