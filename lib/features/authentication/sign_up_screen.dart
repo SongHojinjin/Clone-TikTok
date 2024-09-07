@@ -27,68 +27,97 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: Sizes.size40),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const Text(
-                'Sign up for TikTok',
-                style: TextStyle(
-                  fontSize: Sizes.size24,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-              Gaps.v20,
-              const Text(
-                'create profile,~~~',
-                style: TextStyle(
-                  fontSize: Sizes.size16,
-                  color: Colors.black45,
-                ),
-              ),
-              Gaps.v40,
-              GestureDetector(
-                onTap: () => _onEmailTap(context),
-                child: const AuthButton(
-                    icon: FaIcon(FontAwesomeIcons.user),
-                    text: 'Use email & password'),
-              ),
-              Gaps.v6,
-              const AuthButton(
-                  icon: FaIcon(FontAwesomeIcons.apple),
-                  text: 'Continue with Apple'),
-            ],
-          ),
-        ),
-        bottomNavigationBar: BottomAppBar(
-          color: Colors.grey.shade50,
-          elevation: 2,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: Sizes.size8),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text('Already have an account?'),
-                Gaps.h4,
-                GestureDetector(
-                  onTap: () => _onLoginTap(context),
-                  child: Text(
-                    'Log in',
+    return OrientationBuilder(
+      builder: (context, orientation) {
+        return SafeArea(
+          child: Scaffold(
+            body: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: Sizes.size40),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const Text(
+                    'Sign up for TikTok',
                     style: TextStyle(
-                      color: Theme.of(context).primaryColor,
-                      fontWeight: FontWeight.w600,
+                      fontSize: Sizes.size24,
+                      fontWeight: FontWeight.w700,
                     ),
                   ),
-                )
-              ],
+                  Gaps.v20,
+                  const Text(
+                    'create profile,~~~',
+                    style: TextStyle(
+                      fontSize: Sizes.size16,
+                      color: Colors.black45,
+                    ),
+                  ),
+                  Gaps.v40,
+                  if (orientation == Orientation.portrait) ...[
+                    GestureDetector(
+                      onTap: () => _onEmailTap(context),
+                      child: const AuthButton(
+                        icon: FaIcon(FontAwesomeIcons.user),
+                        text: 'Use email & password',
+                      ),
+                    ),
+                    Gaps.v6,
+                    const AuthButton(
+                      icon: FaIcon(FontAwesomeIcons.apple),
+                      text: 'Continue with Apple',
+                    ),
+                  ],
+                  // if (orientation == Orientation.landscape)
+                  //   Row(
+                  //     children: [
+                  //       Expanded(
+                  //         child: GestureDetector(
+                  //           onTap: () => _onEmailTap(context),
+                  //           child: const AuthButton(
+                  //             icon: FaIcon(FontAwesomeIcons.user),
+                  //             text: 'Use email & password',
+                  //           ),
+                  //         ),
+                  //       ),
+                  //       Gaps.h6,
+                  //       const Expanded(
+                  //         child: AuthButton(
+                  //           icon: FaIcon(FontAwesomeIcons.apple),
+                  //           text: 'Continue with Apple',
+                  //         ),
+                  //       ),
+                  //     ],
+                  //   )
+                ],
+              ),
+            ),
+            bottomNavigationBar: BottomAppBar(
+              color: Colors.grey.shade50,
+              elevation: 2,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: Sizes.size8),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text('Already have an account?'),
+                    Gaps.h4,
+                    GestureDetector(
+                      onTap: () => _onLoginTap(context),
+                      child: Text(
+                        'Log in',
+                        style: TextStyle(
+                          color: Theme.of(context).primaryColor,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
             ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }
