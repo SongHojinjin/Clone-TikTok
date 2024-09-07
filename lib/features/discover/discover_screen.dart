@@ -58,38 +58,43 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                   size: Sizes.size28,
                 ),
                 Gaps.h20,
-                Expanded(
-                  child: TextField(
-                    controller: _textEditingController,
-                    onChanged: _onSearchChanged,
-                    onSubmitted: _onSearchSubmitted,
-                    style: const TextStyle(fontSize: Sizes.size16),
-                    decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.symmetric(
-                          vertical: Sizes.size10, horizontal: Sizes.size12),
-                      //isDense: true,
-                      fillColor: Colors.grey.shade100,
-                      filled: true,
-                      hintText: 'Search',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(Sizes.size8),
-                        borderSide: BorderSide.none,
-                      ),
-                      prefixIcon: const Padding(
-                        padding: EdgeInsets.all(12.0),
-                        child: FaIcon(
-                          FontAwesomeIcons.magnifyingGlass,
-                          size: Sizes.size20,
+                ConstrainedBox(
+                  constraints: const BoxConstraints(
+                    maxWidth: Breakpoints.sm,
+                  ),
+                  child: Expanded(
+                    child: TextField(
+                      controller: _textEditingController,
+                      onChanged: _onSearchChanged,
+                      onSubmitted: _onSearchSubmitted,
+                      style: const TextStyle(fontSize: Sizes.size16),
+                      decoration: InputDecoration(
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: Sizes.size10, horizontal: Sizes.size12),
+                        //isDense: true,
+                        fillColor: Colors.grey.shade100,
+                        filled: true,
+                        hintText: 'Search',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(Sizes.size8),
+                          borderSide: BorderSide.none,
                         ),
-                      ),
-                      suffix: GestureDetector(
-                        onTap: _onClearTap,
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: Sizes.size12),
+                        prefixIcon: const Padding(
+                          padding: EdgeInsets.all(12.0),
                           child: FaIcon(
-                            FontAwesomeIcons.solidCircleXmark,
+                            FontAwesomeIcons.magnifyingGlass,
                             size: Sizes.size20,
-                            color: Colors.grey.shade500,
+                          ),
+                        ),
+                        suffix: GestureDetector(
+                          onTap: _onClearTap,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: Sizes.size12),
+                            child: FaIcon(
+                              FontAwesomeIcons.solidCircleXmark,
+                              size: Sizes.size20,
+                              color: Colors.grey.shade500,
+                            ),
                           ),
                         ),
                       ),
@@ -105,7 +110,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
               onTap: (value) {
                 FocusScope.of(context).unfocus();
               },
-              tabAlignment: TabAlignment.start,
+              tabAlignment: TabAlignment.center,
               padding: const EdgeInsets.symmetric(horizontal: Sizes.size16),
               labelPadding:
                   const EdgeInsets.symmetric(horizontal: Sizes.size20),
