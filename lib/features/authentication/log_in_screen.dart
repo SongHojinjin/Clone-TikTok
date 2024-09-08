@@ -36,11 +36,13 @@ class LogInScreen extends StatelessWidget {
                 ),
               ),
               Gaps.v20,
-              const Text(
-                'create profile,~~~',
-                style: TextStyle(
-                  fontSize: Sizes.size16,
-                  color: Colors.black45,
+              const Opacity(
+                opacity: 0.5,
+                child: Text(
+                  'create profile,~~~',
+                  style: TextStyle(
+                    fontSize: Sizes.size16,
+                  ),
                 ),
               ),
               Gaps.v40,
@@ -59,7 +61,6 @@ class LogInScreen extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: BottomAppBar(
-        color: Colors.grey.shade50,
         elevation: 1, // none
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: Sizes.size8),

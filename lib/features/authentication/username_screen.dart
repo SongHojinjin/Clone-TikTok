@@ -20,12 +20,13 @@ class _UsernameScreenState extends State<UsernameScreen> {
   void initState() {
     super.initState();
 
-    _usernamecontroller.addListener(() {
-      
-      setState(() {
-        _username = _usernamecontroller.text;
-      });
-    },);
+    _usernamecontroller.addListener(
+      () {
+        setState(() {
+          _username = _usernamecontroller.text;
+        });
+      },
+    );
   }
 
   @override
@@ -34,19 +35,20 @@ class _UsernameScreenState extends State<UsernameScreen> {
     super.dispose();
   }
 
-    void onNextTap(){
+  void onNextTap() {
     if (_username.isEmpty) return;
-    Navigator.of(context).push(
-      MaterialPageRoute(builder: (context) => const EmailScreen(),)
-    );
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) => const EmailScreen(),
+    ));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text('Sign up',),
+        title: const Text(
+          'Sign up',
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: Sizes.size20),
@@ -54,39 +56,40 @@ class _UsernameScreenState extends State<UsernameScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Gaps.v40,
-            const Text('Create username',
-            style: TextStyle(
-              fontSize: Sizes.size24,
-              fontWeight: FontWeight.w700,
-            ),),
+            const Text(
+              'Create username',
+              style: TextStyle(
+                fontSize: Sizes.size24,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
             Gaps.v8,
-            const Text('You can always change this later.',
-            style: TextStyle(
-              color: Colors.black54,
-              fontSize: Sizes.size16,
-            ),),
+            const Text(
+              'You can always change this later.',
+              style: TextStyle(
+                color: Colors.black54,
+                fontSize: Sizes.size16,
+              ),
+            ),
             Gaps.v16,
             TextField(
               controller: _usernamecontroller,
               decoration: InputDecoration(
-                hintText: 'Username',
-                enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(
+                  hintText: 'Username',
+                  enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
                     color: Colors.grey.shade400,
-                  )
-                ),
-                focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(
+                  )),
+                  focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
                     color: Colors.grey.shade400,
-                  )
-                )
-              ),
+                  ))),
               cursorColor: Theme.of(context).primaryColor,
             ),
             Gaps.v16,
             GestureDetector(
-              onTap: onNextTap,
-              child: FormButton(disabled: _username.isEmpty)),
+                onTap: onNextTap,
+                child: FormButton(disabled: _username.isEmpty)),
           ],
         ),
       ),

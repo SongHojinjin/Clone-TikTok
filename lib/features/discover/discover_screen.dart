@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/constants/break_points.dart';
@@ -59,9 +60,13 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                 ),
                 Gaps.h20,
                 ConstrainedBox(
-                  constraints: const BoxConstraints(
-                    maxWidth: Breakpoints.sm,
-                  ),
+                  constraints: kIsWeb
+                      ? const BoxConstraints(
+                          maxWidth: Breakpoints.sm,
+                        )
+                      : BoxConstraints(
+                          maxWidth: MediaQuery.of(context).size.width / 2,
+                        ),
                   child: Expanded(
                     child: TextField(
                       controller: _textEditingController,

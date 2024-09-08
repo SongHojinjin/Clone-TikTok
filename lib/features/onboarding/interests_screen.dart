@@ -3,6 +3,7 @@ import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/features/onboarding/tutorial_screen.dart';
 import 'package:tiktok_clone/features/onboarding/widgets/interest_button.dart';
+import 'package:tiktok_clone/utils.dart';
 
 const interests = [
   "Daily Life",
@@ -93,7 +94,7 @@ class _InterestsScreenState extends State<InterestsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        surfaceTintColor: Colors.white,
+        surfaceTintColor: isDarkMode(context) ? Colors.black : Colors.white,
         title: AnimatedOpacity(
             opacity: _showTitle ? 1 : 0,
             duration: const Duration(milliseconds: 300),
@@ -144,7 +145,7 @@ class _InterestsScreenState extends State<InterestsScreen> {
       bottomNavigationBar: BottomAppBar(
         elevation: 2,
         height: 120,
-        color: Colors.white,
+        color: isDarkMode(context) ? null : Colors.white,
         child: Padding(
           padding: const EdgeInsets.only(
             bottom: Sizes.size20,
