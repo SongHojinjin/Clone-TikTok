@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/constants/break_points.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
+import 'package:tiktok_clone/utils.dart';
 
 final tabs = [
   'Top',
@@ -77,7 +78,9 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                         contentPadding: const EdgeInsets.symmetric(
                             vertical: Sizes.size10, horizontal: Sizes.size12),
                         //isDense: true,
-                        fillColor: Colors.grey.shade100,
+                        fillColor: isDarkMode(context)
+                            ? Colors.black26
+                            : Colors.grey.shade100,
                         filled: true,
                         hintText: 'Search',
                         border: OutlineInputBorder(
@@ -119,12 +122,9 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
               padding: const EdgeInsets.symmetric(horizontal: Sizes.size16),
               labelPadding:
                   const EdgeInsets.symmetric(horizontal: Sizes.size20),
-              unselectedLabelColor: Colors.grey.shade500,
-              labelColor: Colors.black,
               labelStyle: const TextStyle(
                 fontWeight: FontWeight.w600,
               ),
-              indicatorColor: Colors.black,
               indicatorSize: TabBarIndicatorSize.tab,
               isScrollable: true,
               splashFactory: NoSplash.splashFactory,
@@ -178,10 +178,12 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                     ),
                     Gaps.v4,
                     if (constraints.maxWidth < 143 ||
-                        constraints.maxWidth > 200)
+                        constraints.maxWidth > 194)
                       DefaultTextStyle(
                         style: TextStyle(
-                          color: Colors.grey.shade500,
+                          color: isDarkMode(context)
+                              ? Colors.grey.shade300
+                              : Colors.grey.shade500,
                           fontWeight: FontWeight.w500,
                         ),
                         child: Row(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
+import 'package:tiktok_clone/utils.dart';
 
 class VideosComment extends StatefulWidget {
   const VideosComment({super.key});
@@ -35,15 +36,16 @@ class _VideosCommentState extends State<VideosComment> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final bool isDark = isDarkMode(context);
     return Container(
       height: size.height * 0.75,
       clipBehavior: Clip.hardEdge,
       decoration:
           BoxDecoration(borderRadius: BorderRadius.circular(Sizes.size14)),
       child: Scaffold(
-        backgroundColor: Colors.grey.shade50,
+        backgroundColor: isDark ? Colors.grey.shade900 : Colors.grey.shade50,
         appBar: AppBar(
-          backgroundColor: Colors.grey.shade50,
+          backgroundColor: isDark ? Colors.grey.shade900 : Colors.grey.shade50,
           automaticallyImplyLeading: false,
           title: const Align(
             alignment: Alignment.center,
@@ -74,9 +76,11 @@ class _VideosCommentState extends State<VideosComment> {
                     itemBuilder: (context, index) => Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const CircleAvatar(
+                            CircleAvatar(
                               radius: Sizes.size24,
                               child: Text('^o^'),
+                              backgroundColor:
+                                  isDark ? Colors.grey.shade600 : null,
                             ),
                             Gaps.h8,
                             Expanded(
@@ -120,7 +124,7 @@ class _VideosCommentState extends State<VideosComment> {
                 bottom: 0,
                 width: size.width,
                 child: BottomAppBar(
-                  color: Colors.grey.shade50,
+                  color: isDark ? Colors.grey.shade900 : Colors.grey.shade50,
                   child: Padding(
                     padding: const EdgeInsets.only(
                       bottom: Sizes.size5,
@@ -155,7 +159,9 @@ class _VideosCommentState extends State<VideosComment> {
                                     fontWeight: FontWeight.normal,
                                     color: Colors.grey.shade500),
                                 filled: true,
-                                fillColor: Colors.grey.shade200,
+                                fillColor: isDark
+                                    ? Colors.black38
+                                    : Colors.grey.shade200,
                                 contentPadding: const EdgeInsets.symmetric(
                                     horizontal: Sizes.size12),
                                 suffixIcon: Padding(
@@ -167,17 +173,23 @@ class _VideosCommentState extends State<VideosComment> {
                                     children: [
                                       FaIcon(
                                         FontAwesomeIcons.at,
-                                        color: Colors.grey.shade900,
+                                        color: isDark
+                                            ? Colors.grey.shade500
+                                            : Colors.grey.shade900,
                                       ),
                                       Gaps.h16,
                                       FaIcon(
                                         FontAwesomeIcons.gift,
-                                        color: Colors.grey.shade900,
+                                        color: isDark
+                                            ? Colors.grey.shade500
+                                            : Colors.grey.shade900,
                                       ),
                                       Gaps.h16,
                                       FaIcon(
                                         FontAwesomeIcons.faceSmile,
-                                        color: Colors.grey.shade900,
+                                        color: isDark
+                                            ? Colors.grey.shade500
+                                            : Colors.grey.shade900,
                                       ),
                                       Gaps.h16,
                                       if (_isWriting)

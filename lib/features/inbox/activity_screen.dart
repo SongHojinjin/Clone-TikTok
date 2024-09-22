@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
+import 'package:tiktok_clone/utils.dart';
 
 class ActivityScreen extends StatefulWidget {
   const ActivityScreen({super.key});
@@ -67,7 +68,6 @@ class _ActivityScreenState extends State<ActivityScreen>
   }
 
   void _toggleAnimation() async {
-    print('title tap');
     if (_animationController.isCompleted) {
       await _animationController.reverse();
     } else {
@@ -87,6 +87,7 @@ class _ActivityScreenState extends State<ActivityScreen>
 
   @override
   Widget build(BuildContext context) {
+    final bool isDark = isDarkMode(context);
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -157,18 +158,24 @@ class _ActivityScreenState extends State<ActivityScreen>
                     leading: Container(
                       width: Sizes.size52,
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: isDark ? Colors.grey.shade900 : Colors.white,
                         shape: BoxShape.circle,
-                        border: Border.all(color: Colors.grey.shade300),
+                        border: Border.all(
+                          color: isDark
+                              ? Colors.grey.shade900
+                              : Colors.grey.shade300,
+                        ),
                       ),
-                      child: const Center(child: FaIcon(FontAwesomeIcons.bell)),
+                      child: const Center(
+                        child: FaIcon(FontAwesomeIcons.bell),
+                      ),
                     ),
                     title: RichText(
                       text: TextSpan(
                           text: 'Account updated: ',
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontWeight: FontWeight.w500,
-                            color: Colors.black,
+                            color: isDark ? null : Colors.black,
                             fontSize: Sizes.size16,
                           ),
                           children: [
@@ -202,9 +209,11 @@ class _ActivityScreenState extends State<ActivityScreen>
           SlideTransition(
             position: _panelAnimation,
             child: Container(
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
+              decoration: BoxDecoration(
+                color: isDark
+                    ? Theme.of(context).appBarTheme.backgroundColor
+                    : Colors.white,
+                borderRadius: const BorderRadius.only(
                   bottomLeft: Radius.circular(Sizes.size4),
                   bottomRight: Radius.circular(Sizes.size4),
                 ),
@@ -216,9 +225,8 @@ class _ActivityScreenState extends State<ActivityScreen>
                     ListTile(
                       title: Row(
                         children: [
-                          FaIcon(
+                          Icon(
                             tab['icon'],
-                            color: Colors.black,
                             size: Sizes.size20,
                           ),
                           Gaps.h20,
