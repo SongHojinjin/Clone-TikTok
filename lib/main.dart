@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/features/authentication/sign_up_screen.dart';
 import 'package:tiktok_clone/features/main_navigation/main_navigation_screen.dart';
+import 'package:flutter_gen/gen_l10n/intl_generate.dart'; // 내 위젯 번역기
 
 class TikTokApp extends StatelessWidget {
   const TikTokApp({super.key});
@@ -12,6 +14,19 @@ class TikTokApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      localizationsDelegates: const [
+        // 내 위젯 번역
+        AppLocalizations.delegate,
+        // flutter 기본 위젯 번역
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: AppLocalizations.supportedLocales,
+      // const [
+      //   Locale('en'),
+      //   Locale('ko'),
+      // ],
       title: 'TikTok Clone',
       themeMode: ThemeMode.system,
       theme: ThemeData(
@@ -57,6 +72,11 @@ class TikTokApp extends StatelessWidget {
             const TextSelectionThemeData(cursorColor: Color(0xFFE9435A)),
         textTheme: Typography.whiteCupertino, // NO geometry, only color
         appBarTheme: AppBarTheme(
+          titleTextStyle: const TextStyle(
+            color: Colors.white,
+            fontSize: Sizes.size16 + Sizes.size2,
+            fontWeight: FontWeight.w600,
+          ),
           backgroundColor: Colors.grey.shade900,
         ),
         tabBarTheme: TabBarTheme(
@@ -68,7 +88,7 @@ class TikTokApp extends StatelessWidget {
           color: Colors.grey.shade900,
         ),
       ),
-      home: const MainNavigationScreen(),
+      home: const SignUpScreen(), // const MainNavigationScreen(),
     );
   }
 }
