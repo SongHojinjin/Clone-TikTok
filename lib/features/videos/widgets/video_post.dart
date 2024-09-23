@@ -5,6 +5,7 @@ import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/features/videos/widgets/video_button.dart';
 import 'package:tiktok_clone/features/videos/widgets/videos_comment.dart';
+import 'package:tiktok_clone/generated/l10n.dart';
 import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
@@ -182,16 +183,16 @@ class _VideoPostState extends State<VideoPost>
                     child: Text('^_^'),
                   ),
                   Gaps.v28,
-                  const VideoButton(
+                  VideoButton(
                     icon: FontAwesomeIcons.solidHeart,
-                    label: '2.5M',
+                    label: S.of(context).likeCount(3000),
                   ),
                   Gaps.v20,
                   GestureDetector(
                       onTap: () => _onCommentTap(context),
-                      child: const VideoButton(
+                      child: VideoButton(
                         icon: FontAwesomeIcons.solidComment,
-                        label: '33.0K',
+                        label: S.of(context).commentCount(10000),
                       )),
                   Gaps.v20,
                   const VideoButton(

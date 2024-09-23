@@ -12,7 +12,7 @@ class TikTokApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    S.load(const Locale('en'));
+    //S.load(const Locale('en'));
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       localizationsDelegates: const [
@@ -86,7 +86,7 @@ class TikTokApp extends StatelessWidget {
           color: Colors.grey.shade900,
         ),
       ),
-      home: const SignUpScreen(), // const MainNavigationScreen(),
+      home: const SignUpScreen(),
     );
   }
 }

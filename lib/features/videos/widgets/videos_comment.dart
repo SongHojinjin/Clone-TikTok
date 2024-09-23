@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
+import 'package:tiktok_clone/generated/l10n.dart';
 import 'package:tiktok_clone/utils.dart';
 
 class VideosComment extends StatefulWidget {
@@ -47,10 +48,10 @@ class _VideosCommentState extends State<VideosComment> {
         appBar: AppBar(
           backgroundColor: isDark ? Colors.grey.shade900 : Colors.grey.shade50,
           automaticallyImplyLeading: false,
-          title: const Align(
+          title: Align(
             alignment: Alignment.center,
             child: Text(
-              '1234 comments',
+              S.of(context).commentTitle(10000, 10000),
             ),
           ),
           actions: [
@@ -78,9 +79,9 @@ class _VideosCommentState extends State<VideosComment> {
                           children: [
                             CircleAvatar(
                               radius: Sizes.size24,
-                              child: Text('^o^'),
                               backgroundColor:
                                   isDark ? Colors.grey.shade600 : null,
+                              child: const Text('^o^'),
                             ),
                             Gaps.h8,
                             Expanded(
