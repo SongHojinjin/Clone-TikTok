@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/features/authentication/sign_up_screen.dart';
 import 'package:tiktok_clone/features/main_navigation/main_navigation_screen.dart';
-import 'package:flutter_gen/gen_l10n/intl_generate.dart'; // 내 위젯 번역기
+import 'package:tiktok_clone/generated/l10n.dart';
 
 class TikTokApp extends StatelessWidget {
   const TikTokApp({super.key});
@@ -15,18 +15,15 @@ class TikTokApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       localizationsDelegates: const [
-        // 내 위젯 번역
-        AppLocalizations.delegate,
-        // flutter 기본 위젯 번역
-        GlobalMaterialLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
+        S.delegate, // import
         GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
       ],
-      supportedLocales: AppLocalizations.supportedLocales,
-      // const [
-      //   Locale('en'),
-      //   Locale('ko'),
-      // ],
+      supportedLocales: const [
+        Locale('en'),
+        Locale('ko'),
+      ],
       title: 'TikTok Clone',
       themeMode: ThemeMode.system,
       theme: ThemeData(

@@ -1,0 +1,8 @@
+{
+  "signUpTitle": "{nameOfTheApp}에 가입하세요",
+  "signUpSubTitle": "create profile,~~~",
+  "emailPasswordBtn": "Use email & password",
+  "appleBtn": "Continue with Apple",
+  "alreadyHaveAnAccount": "Already have an account?",
+  "logInBtn": "Log in"
+}
