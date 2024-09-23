@@ -70,13 +70,13 @@ class S {
     );
   }
 
-  /// `create profile,~~~`
-  String get signUpSubTitle {
+  /// `create profile, {videoCount, plural, =0{no videos} =1{video} other{videos}}, ~~~`
+  String signUpSubTitle(num videoCount) {
     return Intl.message(
-      'create profile,~~~',
+      'create profile, ${Intl.plural(videoCount, zero: 'no videos', one: 'video', other: 'videos')}, ~~~',
       name: 'signUpSubTitle',
       desc: '',
-      args: [],
+      args: [videoCount],
     );
   }
 
@@ -110,13 +110,13 @@ class S {
     );
   }
 
-  /// `Log in`
-  String get logInBtn {
+  /// `Log in {gender, select, male{sir} female{madam} other{human}}`
+  String logInBtn(String gender) {
     return Intl.message(
-      'Log in',
+      'Log in ${Intl.gender(gender, male: 'sir', female: 'madam', other: 'human')}',
       name: 'logInBtn',
       desc: '',
-      args: [],
+      args: [gender],
     );
   }
 }
